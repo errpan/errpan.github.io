@@ -1,126 +1,486 @@
 <!doctype html>
-<html lang="zh-CN" data-theme="light">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="依尔怕尼·依马木，合肥工业大学物流工程与管理硕士研究生。研究供应链优化、强化学习与物流决策。中英文简历、研究经历与开源项目。">
-  <meta name="theme-color" content="#ffffff">
-  <meta property="og:title" content="依尔怕尼·依马木 | Yierpani Yimamu">
-  <meta property="og:description" content="供应链优化 · 强化学习 · 物流决策 | Supply Chain & Reinforcement Learning">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://errpan.github.io/">
-  <meta property="og:image" content="https://errpan.github.io/assets/profile.jpg">
-  <title>依尔怕尼·依马木 | Yierpani Yimamu</title>
-  <link rel="canonical" href="https://errpan.github.io/">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <script>
-    try {
-      if (localStorage.getItem('yierpani-theme-v2') === 'dark') document.documentElement.dataset.theme = 'dark';
-    } catch (_) {}
-  </script>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
-  <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Person","name":"依尔怕尼·依马木","alternateName":"Yierpani Yimamu","url":"https://errpan.github.io/","email":"mailto:pani415@126.com","sameAs":["https://github.com/errpan"],"affiliation":{"@type":"CollegeOrUniversity","name":"Hefei University of Technology"},"alumniOf":{"@type":"CollegeOrUniversity","name":"Shanghai Ocean University"},"knowsAbout":["Supply Chain Optimization","Reinforcement Learning","Operations Research"]}
-  </script>
-</head>
-<body>
-  <a class="skip-link" href="#main" data-en="Skip to content">跳到正文</a>
-  <header class="site-header">
-    <div class="shell header-inner">
-      <a class="brand" href="#home" aria-label="Yierpani Yimamu · Home"><span class="brand-mark">Y<span>.</span></span><span class="brand-name">YIERPANI<span data-en="Research & practice">研究与实践</span></span></a>
-      <nav id="site-nav" aria-label="主导航">
-        <a href="#education" data-en="Education">教育</a>
-        <a href="#research" data-en="Research">研究</a>
-        <a href="#projects" data-en="Projects">项目</a>
-        <a href="#contact" data-en="Contact">联系</a>
-      </nav>
-      <div class="header-actions">
-        <button class="control" id="lang-toggle" type="button" aria-label="Switch to English" hidden>EN</button>
-        <button class="control theme-toggle" id="theme-toggle" type="button" aria-label="切换到深色模式" aria-pressed="false" hidden>
-          <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.3A8.8 8.8 0 0 1 10.7 3.4 8.8 8.8 0 1 0 20.6 13.3Z"/></svg>
-          <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg>
-          <span id="theme-label">深色</span>
+<html lang="en" data-theme="light" data-theme-mode="system">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Yierpani Yimamu, a master's candidate in Logistics Engineering and Management. Research in reinforcement learning, inventory, pricing and logistics optimization." />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:title" content="Yierpani Yimamu · Supply Chain × AI" />
+    <meta property="og:description" content="Logistics Engineering · Reinforcement Learning · Supply Chain Optimization" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://errpan.github.io/assets/profile.jpg" />
+    <link rel="canonical" href="https://errpan.github.io/" />
+    <title>Yierpani Yimamu · Supply Chain × AI</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <script>
+      (() => {
+        let mode = "system";
+        try { mode = localStorage.getItem("cv-theme-original") || mode; } catch (_) {}
+        if (!["system", "light", "dark"].includes(mode)) mode = "system";
+        const dark = mode === "dark" || (mode === "system" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+        document.documentElement.dataset.themeMode = mode;
+      })();
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "依尔怕尼·依马木",
+        "alternateName": "Yierpani Yimamu",
+        "url": "https://errpan.github.io/",
+        "email": "mailto:pani415@126.com",
+        "sameAs": ["https://github.com/errpan"],
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "上海海洋大学" },
+          { "@type": "CollegeOrUniversity", "name": "合肥工业大学" }
+        ],
+        "knowsAbout": ["Supply Chain Optimization", "Deep Reinforcement Learning", "Multi-Agent Systems", "Python"]
+      }
+    </script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to main content</a>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+    <header class="site-header" id="site-header">
+      <nav class="nav shell" aria-label="Main navigation">
+        <a class="logo" href="#home" aria-label="Homepage">
+          <span>YIERPANI</span><span class="logo-slash">/</span><span class="logo-cv">CV</span>
+        </a>
+
+        <a class="header-email" href="mailto:pani415@126.com"><span>EMAIL</span> pani415@126.com</a>
+
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Navigation menu" aria-expanded="false" aria-controls="nav-panel">
+          <span></span><span></span>
         </button>
-        <button class="control menu-toggle" id="menu-toggle" type="button" aria-label="展开菜单" aria-controls="site-nav" aria-expanded="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+
+        <div class="nav-panel" id="nav-panel">
+          <div class="nav-links">
+            <a href="#journey" data-i18n="navJourney">CV</a>
+            <a href="#about" data-i18n="navAbout">About</a>
+            <a href="#projects" data-i18n="navProjects">Projects</a>
+            <a href="#research" data-i18n="navResearch">Lab</a>
+          </div>
+          <div class="nav-actions">
+            <button class="command-button" id="command-open" type="button" aria-label="Open quick navigation">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+              <span data-i18n="quickNav">Quick nav</span><kbd>Ctrl K</kbd>
+            </button>
+            <button class="text-button" id="lang-toggle" type="button" aria-label="Switch language">EN</button>
+            <button class="icon-button" id="theme-toggle" type="button" aria-label="Theme follows system; switch to light mode">
+              <svg class="system" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>
+              <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+              <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path></svg>
+            </button>
+            <a class="nav-contact" href="mailto:pani415@126.com" data-i18n="navContact">Contact</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="home" data-focus-selected="inventory">
+        <canvas id="network-canvas" aria-hidden="true"></canvas>
+        <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
+        <div class="shell hero-grid">
+          <div class="hero-copy reveal">
+            <div class="availability"><i></i><span data-i18n="availability">Open to academic exchange &amp; collaboration</span></div>
+            <p class="hero-kicker"><span>01</span> SUPPLY CHAIN × INTELLIGENCE</p>
+            <h1>
+              <span data-i18n="hello">Hi, I am</span><br />
+              <strong data-i18n="name">Yierpani Yimamu</strong><span class="cursor" aria-hidden="true"></span>
+            </h1>
+            <p class="hero-english-name">YIERPANI YIMAMU</p>
+            <p class="hero-role" data-i18n="heroRole">Master&#x27;s Candidate in Logistics Engineering &amp; Management</p>
+            <p class="hero-lead" data-i18n="heroLead">Studying reinforcement learning for supply chain optimization, with a focus on inventory, pricing and logistics decisions.</p>
+            <div class="focus-switch" role="group" aria-label="Explore research directions">
+              <button type="button" class="active" data-focus="inventory" aria-pressed="true"><i>01</i><span data-i18n="focusInventory">Inventory</span></button>
+              <button type="button" data-focus="pricing" aria-pressed="false"><i>02</i><span data-i18n="focusPricing">Pricing</span></button>
+              <button type="button" data-focus="logistics" aria-pressed="false"><i>03</i><span data-i18n="focusLogistics">Logistics</span></button>
+            </div>
+            <p class="focus-note" id="focus-note" data-i18n="focusInventoryNote" aria-live="polite">Replenishment + markdown · DQN / PPO</p>
+            <div class="hero-actions">
+              <a class="button button-primary magnetic" href="#journey">
+                <span data-i18n="viewCv">View CV</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 14 0M13 6l6 6-6 6"></path></svg>
+              </a>
+              <a class="button button-ghost" href="assets/Yierpani_Yimamu_CV_CN.pdf" download="依尔怕尼_依马木_中文简历.pdf" data-goatcounter-click="download-cv-zh" data-goatcounter-title="Chinese CV download click">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg>
+                <span data-i18n="downloadCvZh">Chinese CV</span>
+              </a>
+              <a class="button button-ghost" href="assets/Yierpani_Yimamu_CV.pdf" download="Yierpani_Yimamu_CV.pdf" data-goatcounter-click="download-cv-en" data-goatcounter-title="English CV download click">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg>
+                <span data-i18n="downloadCvEn">English CV</span>
+              </a>
+              <a class="button button-ghost" href="https://github.com/errpan" target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.3 4 5 5 0 0 0 19.2.5S18 0 15 2a13.4 13.4 0 0 0-7 0C5 .1 3.8.5 3.8.5A5 5 0 0 0 3.7 4a5.4 5.4 0 0 0-1.5 3.7c0 5.3 3.5 6.5 6.8 6.9a4.8 4.8 0 0 0-1 3.4v4"></path><path d="M9 18c-4.5 2-5-2-7-2"></path></svg>
+                GitHub
+              </a>
+            </div>
+            <div class="hero-meta">
+              <span><i class="meta-dot"></i><span data-i18n="location">Hefei · China</span></span>
+              <span>UTC +08:00</span>
+            </div>
+          </div>
+
+          <div class="portrait-stage reveal reveal-delay-1">
+            <div class="orbit orbit-one" aria-hidden="true"><span></span></div>
+            <div class="orbit orbit-two" aria-hidden="true"><span></span></div>
+            <div class="portrait-frame">
+              <div class="portrait-noise" aria-hidden="true"></div>
+              <img src="assets/profile.jpg" alt="Portrait of Yierpani Yimamu" width="480" height="640" />
+              <div class="portrait-caption">
+                <span class="caption-label">CURRENT FOCUS</span>
+                <strong>DRL × Supply Chain</strong>
+              </div>
+            </div>
+            <div class="floating-code code-one" aria-hidden="true"><span>agent</span>.learn()</div>
+            <div class="floating-code code-two" aria-hidden="true">π(a|s) → max R</div>
+          </div>
+        </div>
+
+        <div class="hero-index shell" aria-hidden="true">
+          <span>PORTFOLIO / 2026</span><span>SCROLL TO EXPLORE ↓</span>
+        </div>
+      </section>
+
+      <section class="signal-strip" aria-label="Profile highlights">
+        <div class="shell signal-grid">
+          <div class="signal-item reveal"><strong>02</strong><span data-i18n="statSchools">universities</span></div>
+          <div class="signal-item reveal"><strong id="repo-count">—</strong><span data-i18n="statRepos">public repositories</span></div>
+          <div class="signal-item reveal"><strong>06</strong><span data-i18n="statCerts">certifications</span></div>
+          <div class="signal-item signal-wide reveal"><span class="signal-pulse"></span><span data-i18n="statFocus">Algorithms grounded in real operations</span></div>
+        </div>
+      </section>
+
+      <section class="section about" id="about">
+        <div class="shell">
+          <div class="section-intro reveal">
+            <p class="section-index">04 / SELF ASSESSMENT</p>
+            <h2 data-i18n-html="aboutTitle">Responsibility, learning<br /><em>and teamwork.</em></h2>
+            <p data-i18n="aboutLead">I adapt quickly to new responsibilities, communicate clearly, learn continuously, solve problems, and value working with others toward shared goals.</p>
+          </div>
+
+          <div class="bento-grid">
+            <article class="bento-card bento-main reveal">
+              <div class="card-topline"><span data-i18n="researchProfile">SELF ASSESSMENT</span><span>01</span></div>
+              <h3 data-i18n="researchQuestion">Turn responsibilities into results through reliable execution, continuous learning, and clear communication.</h3>
+              <p data-i18n="researchAnswer">I understand product supply, international trade, and logistics practice, with solid computing and English skills. I learn new business contexts quickly and actively seek practical solutions.</p>
+              <div class="topic-cloud">
+                <span>Responsibility</span><span>Teamwork</span><span>Learning</span><span>Communication</span><span>Problem Solving</span>
+              </div>
+            </article>
+
+            <article class="bento-card bento-education reveal reveal-delay-1">
+              <div class="card-topline"><span data-i18n="now">NOW</span><span>2024—</span></div>
+              <div class="school-mark">HFUT</div>
+              <h3 data-i18n="hfut">Hefei University of Technology</h3>
+              <p data-i18n="hfutDegree">Master&#x27;s Candidate · Logistics Engineering &amp; Management</p>
+            </article>
+
+            <article class="bento-card bento-toolkit reveal">
+              <div class="card-topline"><span data-i18n="toolkit">TOOLKIT</span><span>STACK</span></div>
+              <div class="tool-list">
+                <span><i style="--level:92%"></i>Python</span>
+                <span><i style="--level:84%"></i>Power BI</span>
+                <span><i style="--level:88%"></i>Excel</span>
+                <span><i style="--level:76%"></i>SPSS</span>
+              </div>
+            </article>
+
+            <article class="bento-card bento-language reveal reveal-delay-1">
+              <div class="card-topline"><span data-i18n="language">LANGUAGE</span><span>CET-6</span></div>
+              <div class="language-score"><strong>498</strong><span data-i18n="cetScore">CET-6 English</span></div>
+              <p data-i18n="languageDesc">Working proficiency for study, research, and everyday communication.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section research" id="research">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <div>
+              <p class="section-index">06 / RESEARCH LAB</p>
+              <h2 data-i18n="researchTitle">Research Interests &amp; Lab</h2>
+            </div>
+            <p data-i18n="researchLead">Explore how algorithms improve inventory, pricing and logistics decisions.</p>
+          </div>
+
+          <div class="research-layout">
+            <div class="decision-loop reveal" aria-label="Intelligent decision loop">
+              <svg viewBox="0 0 620 430" role="img" aria-labelledby="loop-title">
+                <title id="loop-title">Supply chain intelligent decision loop</title>
+                <defs>
+                  <linearGradient id="loopGradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8cffbd"/><stop offset="1" stop-color="#4ad6ff"/></linearGradient>
+                  <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                </defs>
+                <g class="loop-lines" fill="none" stroke="url(#loopGradient)" stroke-width="2">
+                  <path d="M310 64 C440 64 508 140 508 215"/>
+                  <path d="M508 215 C508 320 420 366 310 366"/>
+                  <path d="M310 366 C180 366 112 310 112 215"/>
+                  <path d="M112 215 C112 120 200 64 310 64"/>
+                </g>
+                <g class="loop-nodes">
+                  <g transform="translate(310 64)"><circle r="48"/><text text-anchor="middle" y="-3">STATE</text><text class="node-cn" text-anchor="middle" y="17" data-svg-zh="环境状态" data-svg-en="Observe">Observe</text></g>
+                  <g transform="translate(508 215)"><circle r="48"/><text text-anchor="middle" y="-3">POLICY</text><text class="node-cn" text-anchor="middle" y="17" data-svg-zh="策略学习" data-svg-en="Learn">Learn</text></g>
+                  <g transform="translate(310 366)"><circle r="48"/><text text-anchor="middle" y="-3">ACTION</text><text class="node-cn" text-anchor="middle" y="17" data-svg-zh="决策行动" data-svg-en="Decide">Decide</text></g>
+                  <g transform="translate(112 215)"><circle r="48"/><text text-anchor="middle" y="-3">REWARD</text><text class="node-cn" text-anchor="middle" y="17" data-svg-zh="反馈优化" data-svg-en="Improve">Improve</text></g>
+                </g>
+                <g class="loop-center" transform="translate(310 215)" filter="url(#glow)"><circle r="64"/><text text-anchor="middle" y="-7">SUPPLY</text><text text-anchor="middle" y="15">CHAIN</text></g>
+                <circle class="loop-particle" r="5"><animateMotion dur="7s" repeatCount="indefinite" path="M310 64 C440 64 508 140 508 215 C508 320 420 366 310 366 C180 366 112 310 112 215 C112 120 200 64 310 64"/></circle>
+              </svg>
+            </div>
+
+            <div class="research-list">
+              <article class="research-item reveal">
+                <span>01</span>
+                <div><h3 data-i18n="topic1">Deep Reinforcement Learning</h3><p data-i18n="topic1Desc">Sequential decisions, multi-objective optimization, and simulation-driven policy learning under uncertainty.</p></div>
+              </article>
+              <article class="research-item reveal">
+                <span>02</span>
+                <div><h3 data-i18n="topic2">Multi-Agent Systems</h3><p data-i18n="topic2Desc">Coordination, competition, information sharing, and distributed decisions across supply-chain nodes.</p></div>
+              </article>
+              <article class="research-item reveal">
+                <span>03</span>
+                <div><h3 data-i18n="topic3">Perishable Supply Chains</h3><p data-i18n="topic3Desc">Inventory control, waste reduction, demand forecasting, and supply-demand balance under uncertainty.</p></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="decision-lab reveal" id="decision-lab">
+            <div class="lab-header">
+              <div><p class="section-index">INTERACTIVE / DECISION LAB</p><h3 data-i18n="labTitle">Supply Chain Decision Lab</h3></div>
+              <div class="lab-status"><i></i><span data-i18n="labStatus">ILLUSTRATIVE DEMO</span></div>
+            </div>
+            <div class="lab-presets" role="group" aria-label="Simulation scenarios">
+              <button type="button" data-lab-preset="stable" aria-pressed="false"><span data-i18n="presetStable">Stable demand</span></button>
+              <button type="button" data-lab-preset="perishable" aria-pressed="false"><span data-i18n="presetPerishable">Perishable pressure</span></button>
+              <button type="button" data-lab-preset="coordinated" aria-pressed="false"><span data-i18n="presetCoordinated">Volatile + coordinated</span></button>
+              <button type="button" class="preset-reset" data-lab-preset="reset"><span aria-hidden="true">↺</span><span data-i18n="resetLab">Reset</span></button>
+            </div>
+            <div class="lab-grid">
+              <div class="lab-controls">
+                <div class="param-group" data-param="volatility">
+                  <div class="param-label"><b data-i18n="volatility">Demand volatility</b><output id="volatility-value" data-i18n="medium">Medium</output></div>
+                  <div class="param-tabs" role="group" aria-label="需求波动"><button type="button" data-value="20" data-level="low" data-i18n="low">Low</button><button class="active" type="button" data-value="50" data-level="medium" data-i18n="medium" aria-pressed="true">Medium</button><button type="button" data-value="80" data-level="high" data-i18n="high">High</button></div>
+                </div>
+                <div class="param-group" data-param="perishability">
+                  <div class="param-label"><b data-i18n="perishability">Perishability</b><output id="perishability-value" data-i18n="medium">Medium</output></div>
+                  <div class="param-tabs" role="group" aria-label="易腐程度"><button type="button" data-value="20" data-level="low" data-i18n="low">Low</button><button class="active" type="button" data-value="50" data-level="medium" data-i18n="medium" aria-pressed="true">Medium</button><button type="button" data-value="80" data-level="high" data-i18n="high">High</button></div>
+                </div>
+                <div class="param-group" data-param="coordination">
+                  <div class="param-label"><b data-i18n="coordination">Multi-agent coordination</b><output id="coordination-value" data-i18n="high">High</output></div>
+                  <div class="param-tabs" role="group" aria-label="多智能体协同"><button type="button" data-value="20" data-level="low" data-i18n="low">Low</button><button type="button" data-value="50" data-level="medium" data-i18n="medium">Medium</button><button class="active" type="button" data-value="80" data-level="high" data-i18n="high" aria-pressed="true">High</button></div>
+                </div>
+                <p class="lab-note" data-i18n="labNote">This illustrative model is not a research result. Select levels to explore policy changes.</p>
+              </div>
+              <div class="lab-chart-wrap">
+                <canvas id="lab-chart" width="680" height="300" aria-label="Supply chain simulation chart"></canvas>
+                <div class="chart-legend"><span><i></i><span data-i18n="baseline">Baseline</span></span><span><i></i><span data-i18n="adaptive">Adaptive policy</span></span></div>
+              </div>
+              <div class="lab-results">
+                <div><span data-i18n="serviceLevel">Service level</span><strong id="service-result">91.2%</strong><small id="service-delta">+8.4%</small></div>
+                <div><span data-i18n="wasteRate">Waste rate</span><strong id="waste-result">8.7%</strong><small id="waste-delta">-5.1%</small></div>
+                <div><span data-i18n="stability">System stability</span><strong id="stability-result">86</strong><small>/ 100</small></div>
+                <p id="policy-advice" data-i18n="policyAdvice">Recommended: coordinated replenishment with dynamic safety stock.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section projects" id="projects">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <div><p class="section-index">05 / SELECTED WORK</p><h2 data-i18n="projectsTitle">Selected work</h2></div>
+            <a class="inline-link" href="https://github.com/errpan?tab=repositories" target="_blank" rel="noreferrer"><span data-i18n="allRepos">All repositories</span> ↗</a>
+          </div>
+
+          <div class="project-list">
+            <article class="project-card project-featured reveal tilt-card">
+              <div class="project-content">
+                <div class="project-meta"><span>01 / OPEN SOURCE</span><span>Python · MIT</span></div>
+                <h3>PaperRenamer</h3>
+                <p data-i18n="paperDesc">An intelligent PDF renaming tool for academic papers. It combines embedded metadata, DOI, Crossref, arXiv, and BibTeX data in a customizable GUI workflow.</p>
+                <div class="project-tags"><span>PDF Metadata</span><span>Crossref API</span><span>arXiv</span><span>GUI</span></div>
+                <a class="project-link" href="https://github.com/errpan/PapperRenamer-PDF-" target="_blank" rel="noreferrer"><span data-i18n="sourceCode">View source</span><i>↗</i></a>
+              </div>
+              <div class="paper-visual" aria-hidden="true">
+                <div class="file-stack"><i></i><i></i><i></i><strong>PDF</strong></div>
+                <div class="rename-flow"><span>paper_1.pdf</span><i>→</i><span>Author_2025_Title.pdf</span></div>
+                <div class="project-metric"><strong id="paper-stars">—</strong><span>GitHub Stars</span></div>
+              </div>
+            </article>
+
+            <article class="project-card project-half reveal tilt-card">
+              <div class="project-content">
+                <div class="project-meta"><span>02 / ALGORITHM</span><span>C++</span></div>
+                <h3>2D Bin Packing</h3>
+                <p data-i18n="packingDesc">A C++ reproduction of Recursive Partitioning, Five-block and L-Algorithm for packing identical rectangles.</p>
+                <a class="project-link" href="https://github.com/errpan/2D-Bin-Packing-Problem-same-rectangles-pack-in-the-big-rectangle" target="_blank" rel="noreferrer"><span data-i18n="exploreProject">Explore project</span><i>↗</i></a>
+              </div>
+              <div class="packing-visual" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </article>
+
+            <article class="project-card project-half project-research reveal reveal-delay-1 tilt-card">
+              <div class="project-content">
+                <div class="project-meta"><span>03 / RESEARCH FOCUS</span><span>DRL · MARL</span></div>
+                <h3 data-i18n="supplyProject">Intelligent Decisions for Stochastic Supply Chains</h3>
+                <p data-i18n="supplyDesc">Build age-stratified inventory simulations and use DQN/PPO for replenishment and markdown decisions, evaluating profit–waste trade-offs.</p>
+                <a class="project-link" href="mailto:pani415@126.com?subject=Research%20Collaboration"><span data-i18n="discuss">Discuss the research</span><i>↗</i></a>
+              </div>
+              <div class="chart-visual" aria-hidden="true">
+                <div class="chart-bars"><i style="--h:30%"></i><i style="--h:52%"></i><i style="--h:43%"></i><i style="--h:75%"></i><i style="--h:64%"></i><i style="--h:90%"></i><i style="--h:78%"></i></div>
+                <svg viewBox="0 0 300 110"><path d="M0 89 C34 82 48 93 77 65 S127 72 151 45 S207 58 231 31 S270 26 300 8"/></svg>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section journey" id="journey">
+        <div class="shell journey-grid">
+          <div class="journey-heading reveal">
+            <p class="section-index">02 / CURRICULUM VITAE</p>
+            <h2 data-i18n-html="journeyTitle">Curriculum<br /><em>Vitae</em></h2>
+            <p data-i18n="journeyLead">My education, research and professional experience.</p>
+          </div>
+
+          <div class="timeline">
+            <h3 class="timeline-group-title" data-i18n="educationBackground">Education</h3>
+            <article class="timeline-entry reveal">
+              <div class="timeline-date">2019.09 — 2023.06</div>
+              <div class="timeline-dot"></div>
+              <div><p class="timeline-type" data-i18n="education">Education</p><h3 data-i18n="shou">Shanghai Ocean University</h3><h4 data-i18n="shouDegree">Undergraduate · Logistics Management</h4><p data-i18n="shouDesc">Studied supply-chain management, operations, international logistics, logistics system optimization, ERP, and business analysis.</p></div>
+            </article>
+            <article class="timeline-entry reveal">
+              <div class="timeline-date">2024.09 — <span data-i18n="present">Present</span></div>
+              <div class="timeline-dot"></div>
+              <div><p class="timeline-type" data-i18n="education">Education</p><h3 data-i18n="hfut">Hefei University of Technology</h3><h4 data-i18n="hfutDegree">Master&#x27;s Candidate · Logistics Engineering &amp; Management</h4><p data-i18n="hfutDesc">Coursework in inventory management, optimization, logistics modeling and simulation. Expected graduation: June 2027.</p></div>
+            </article>
+
+            <h3 class="timeline-group-title" data-i18n="researchExperience">Research Experience</h3>
+            <article class="timeline-entry reveal">
+              <div class="timeline-date">2025.12 — <span data-i18n="present">Present</span></div>
+              <div class="timeline-dot"></div>
+              <div><p class="timeline-type" data-i18n="researchLabel">Research</p><h3 data-i18n="perishableResearch">Age-Stratified Perishable Inventory</h3><h4 data-i18n="perishableContext">NSFC Special Project · No. 72542001</h4><p data-i18n="perishableDesc">Build inventory simulations in Python/PyTorch; study DQN and preference-conditioned PPO for joint replenishment and markdown decisions.</p></div>
+            </article>
+            <article class="timeline-entry reveal">
+              <div class="timeline-date">2026 — <span data-i18n="present">Present</span></div>
+              <div class="timeline-dot"></div>
+              <div><p class="timeline-type" data-i18n="researchLabel">Research</p><h3 data-i18n="pricingResearch">Algorithmic Collusion in Supply Chains</h3><h4 data-i18n="pricingContext">NSFC General Program · No. 72571084</h4><p data-i18n="pricingDesc">Run joint pricing and inventory experiments; prepare game-theoretic simulation data and figures for a working paper.</p></div>
+            </article>
+            <article class="timeline-entry reveal">
+              <div class="timeline-date">2026.10 — <span data-i18n="present">Present</span></div>
+              <div class="timeline-dot"></div>
+              <div><p class="timeline-type" data-i18n="researchLabel">Research</p><h3 data-i18n="tobaccoResearch">Tobacco Logistics Optimization</h3><h4 data-i18n="tobaccoContext">Industry project · routing &amp; loading</h4><p data-i18n="tobaccoDesc">Analyze sales and transport data; develop VRP and bin-packing models for delivery planning.</p></div>
+            </article>
+            <article class="timeline-entry reveal">
+              <div class="timeline-date"><span data-i18n="summer2025">Summer 2025</span></div>
+              <div class="timeline-dot"></div>
+              <div><p class="timeline-type" data-i18n="researchLabel">Research</p><h3 data-i18n="cheryResearch">Chery Group Milk-Run Optimization</h3><h4 data-i18n="cheryContext">Industry–university research project</h4><p data-i18n="cheryDesc">Reproduce packing algorithms in C++ and build a Python tool for routes, time windows, costs and iteration tracking.</p></div>
+            </article>
+            <div class="resume-note reveal"><h4 data-i18n="patentTitle">Patent Application</h4><p data-i18n="patentDesc">Co-inventor: a data-driven age-stratified inventory optimization method and system for perishable products. Application No. 202611386809.1; accepted, not granted.</p></div>
+            <div class="resume-note reveal"><h4 data-i18n="honorsTitle">Scholarships</h4><p data-i18n="honorsDesc">Second-Class Graduate Academic Scholarship (2026–2027); Third-Class Graduate Academic Scholarship (2024–2025).</p></div>
+
+            <h3 class="timeline-group-title" data-i18n="internshipExperience">Work &amp; Internships</h3>
+            <article class="timeline-entry reveal">
+              <div class="timeline-date">2023.01 — 2023.02</div>
+              <div class="timeline-dot"></div>
+              <div><p class="timeline-type" data-i18n="internship">Internship</p><h3 data-i18n="hufang">Shanghai Hufang Architectural Design, Kashgar Branch</h3><h4 data-i18n="opsRole">Operations Assistant</h4><p data-i18n="opsDesc">Supported client services, issue handling, report checks, operating-data summaries, and document administration.</p></div>
+            </article>
+            <article class="timeline-entry reveal">
+              <div class="timeline-date">2024.03 — 2024.06</div>
+              <div class="timeline-dot"></div>
+              <div><p class="timeline-type" data-i18n="experience">Experience</p><h3 data-i18n="sangye">Shanghai Sangye Textile Co., Ltd.</h3><h4 data-i18n="tradeRole">Foreign Trade Specialist</h4><p data-i18n="tradeDesc">Managed order follow-up and client inquiries, tracked shipment data, verified documents, and coordinated fulfillment across internal teams.</p></div>
+            </article>
+          </div>
+
+          <div class="campus-block reveal">
+            <div class="campus-heading"><p class="section-index">CAMPUS EXPERIENCE</p><h3 data-i18n="campusExperience">Campus Experience</h3></div>
+            <div class="campus-grid">
+              <article><span>01</span><h4 data-i18n="erpProject">ERP Sand-table Simulation</h4><p data-i18n="erpDesc">Managed procurement, material orders, warehouse inventory, and raw-material lead times in a team-based business simulation.</p></article>
+              <article><span>02</span><h4 data-i18n="ecommerceProject">E-commerce Simulation</h4><p data-i18n="ecommerceDesc">Helped operate the Xinjiang specialty shop and simulated distribution, transport, and procurement on the Changfeng platform.</p></article>
+              <article><span>03</span><h4 data-i18n="studentRole">Student Leadership</h4><p data-i18n="studentRoleDesc">Served as sports representative and counselor assistant, organizing sports events, reading sessions, site visits, and welcome programs.</p></article>
+              <article><span>04</span><h4 data-i18n="socialPractice">Community Service</h4><p data-i18n="socialPracticeDesc">Participated in administrative volunteer service and donated blood in 2019.</p></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section credentials" id="credentials">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <div><p class="section-index">03 / SKILLS & CERTIFICATES</p><h2 data-i18n="credentialsTitle">Skills &amp; Certificates</h2></div>
+            <p data-i18n="credentialsLead">Technical skill, business context, and collaborative execution.</p>
+          </div>
+          <div class="credential-grid">
+            <div class="credential-column reveal">
+              <h3 data-i18n="technical">TECH &amp; ANALYTICS</h3>
+              <div class="skill-chips"><span>Python</span><span>C++</span><span>Power BI</span><span>Excel</span><span>SPSS</span><span>Data Visualization</span><span>Simulation</span><span>Git / GitHub</span><span>PyTorch</span><span>DQN / PPO</span><span>Gurobi / OR-Tools</span><span>SQL</span></div>
+            </div>
+            <div class="credential-column reveal reveal-delay-1">
+              <h3 data-i18n="certifications">CERTIFICATIONS</h3>
+              <ul class="certificate-list">
+                <li><span>01</span><span data-i18n="cert1">CSCMP Supply Chain Management</span></li>
+                <li><span>02</span><span data-i18n="cert2">NCRE Level 2 - Python</span></li>
+                <li><span>03</span><span data-i18n="cert3">Power BI Business Intelligence</span></li>
+                <li><span>04</span><span data-i18n="cert4">College English Test Band 6</span></li>
+                <li><span>05</span><span data-i18n="cert5">Mandarin Proficiency Level 2-A</span></li>
+                <li><span>06</span><span data-i18n="cert6">C1 driver&#x27;s license</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="contact-orb" aria-hidden="true"></div>
+        <div class="shell contact-inner reveal">
+          <p class="section-index">07 / CONNECT</p>
+          <h2 data-i18n-html="contactTitle">Let’s connect<br /><em>and explore.</em></h2>
+          <p data-i18n="contactLead">Open to conversations on supply chain optimization, reinforcement learning and research collaboration.</p>
+          <div class="contact-actions">
+            <a class="button button-primary magnetic" href="mailto:pani415@126.com" data-goatcounter-click="contact-email" data-goatcounter-title="Email contact click"><span data-i18n="sendEmail">Send an email</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 14 0M13 6l6 6-6 6"></path></svg></a>
+            <button class="email-copy" id="email-copy" type="button" data-email="pani415@126.com"><span>pani415@126.com</span><small data-i18n="copy">Copy</small></button>
+          </div>
+          <div class="contact-links"><a href="https://github.com/errpan" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://errpan.github.io/" target="_blank" rel="noreferrer">errpan.github.io ↗</a></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-inner"><p>© <span id="year">2026</span> <span data-i18n="name">Yierpani Yimamu</span></p><p data-i18n="footerNote">Research, practice &amp; continuous learning.</p><a href="#home" data-i18n="backTop">Back to top ↑</a></div>
+    </footer>
+
+    <div class="command-overlay" id="command-overlay" aria-hidden="true">
+      <div class="command-palette" role="dialog" aria-modal="true" aria-labelledby="command-title">
+        <div class="command-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+          <input id="command-input" type="text" autocomplete="off" placeholder="Search pages or actions…" data-i18n-placeholder="commandPlaceholder" />
+          <kbd>ESC</kbd>
+        </div>
+        <p class="command-label" id="command-title" data-i18n="commandTitle">QUICK NAVIGATION</p>
+        <div class="command-list" id="command-list">
+          <button type="button" data-command="cv resume journey" data-target="#journey"><span><i>01</i><b data-i18n="navJourney">CV</b></span><small>CV</small></button>
+          <button type="button" data-command="skills certificates" data-target="#credentials"><span><i>02</i><b data-i18n="credentialsTitle">Skills &amp; Certificates</b></span><small>SKILLS</small></button>
+          <button type="button" data-command="about assessment" data-target="#about"><span><i>03</i><b data-i18n="navAbout">About</b></span><small>ABOUT</small></button>
+          <button type="button" data-command="projects github" data-target="#projects"><span><i>04</i><b data-i18n="navProjects">Projects</b></span><small>WORK</small></button>
+          <button type="button" data-command="lab simulation research" data-target="#decision-lab"><span><i>05</i><b data-i18n="labTitle">Supply Chain Decision Lab</b></span><small>LAB</small></button>
+          <button type="button" data-command="contact email" data-target="#contact"><span><i>06</i><b data-i18n="navContact">Contact</b></span><small>CONNECT</small></button>
+        </div>
+        <div class="command-footer"><span><kbd>↑</kbd><kbd>↓</kbd> <span data-i18n="move">move</span></span><span><kbd>↵</kbd> <span data-i18n="enter">open</span></span></div>
       </div>
     </div>
-  </header>
-  <main id="main">
-    <section class="hero shell" id="home" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="status-dot"></span><span data-en="Hefei University of Technology · Master's candidate">合肥工业大学 · 硕士研究生</span></p>
-        <p class="hello" data-en="Hello, I'm">你好，我是</p>
-        <h1 id="hero-title" data-en="Yierpani Yimamu">依尔怕尼<span class="name-dot">·</span>依马木</h1>
-        <p class="name-secondary" data-en="依尔怕尼 · 依马木">YIERPANI YIMAMU</p>
-        <h2 class="hero-statement" data-en="Better supply chain decisions through data and learning.">用数据与算法，改善供应链决策。</h2>
-        <p class="hero-lead" data-en="I study reinforcement learning and operations research for inventory, pricing and logistics, connecting mathematical models with practical decisions.">研究强化学习与运筹优化，关注库存、定价和物流，让模型走向实际决策。</p>
-        <div class="tags hero-tags"><span data-en="Supply chain optimization">供应链优化</span><span data-en="Reinforcement learning">强化学习</span><span data-en="Operations research">运筹优化</span></div>
-        <div class="hero-actions">
-          <a class="button primary" href="assets/Yierpani_Yimamu_CV_CN.pdf" download="依尔怕尼_依马木_中文简历.pdf" data-goatcounter-click="download-cv-zh" data-goatcounter-title="Chinese CV download click"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg><span data-en="Chinese CV">下载中文简历</span><small>PDF</small></a>
-          <a class="button secondary" href="assets/Yierpani_Yimamu_CV.pdf" download="Yierpani_Yimamu_CV.pdf" data-goatcounter-click="download-cv-en" data-goatcounter-title="English CV download click"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg><span data-en="English CV">下载英文简历</span><small>PDF</small></a>
-        </div>
-        <div class="hero-links"><a href="mailto:pani415@126.com">pani415@126.com <span aria-hidden="true">↗</span></a><span class="link-separator" aria-hidden="true"></span><a href="https://github.com/errpan" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><span class="hero-location" data-en="Hefei, China">中国 · 合肥</span></div>
-      </div>
-      <aside class="profile-card" aria-label="个人照片">
-        <div class="portrait"><img src="assets/profile.jpg" alt="依尔怕尼·依马木的个人照片" width="1728" height="2304" fetchpriority="high"></div>
-        <div class="profile-caption"><p data-en="CURRENT FOCUS">当前研究</p><strong>Supply Chain × AI</strong><span data-en="Logistics Engineering & Management">物流工程与管理</span></div>
-        <span class="portrait-note" aria-hidden="true">MODELS → DECISIONS</span>
-      </aside>
-    </section>
-    <div class="shell overview" aria-label="研究概览">
-      <p class="overview-intro" data-en="From mathematical models to everyday operations.">从数学模型，到真实运营。</p>
-      <div><strong>01</strong><span data-en="Inventory & pricing">库存与定价</span></div>
-      <div><strong>02</strong><span data-en="Learning & simulation">学习与仿真</span></div>
-      <div><strong>03</strong><span data-en="Routing & packing">路径与装箱</span></div>
-    </div>
-    <section class="section shell" id="education" aria-labelledby="education-title">
-      <div class="section-heading"><div><p class="eyebrow section-number">01 / EDUCATION</p><h2 id="education-title" data-en="Education">教育背景</h2></div><p data-en="A foundation in logistics, a focus on intelligent decisions.">以物流为基础，向智能决策深入。</p></div>
-      <div class="education-grid">
-        <article class="education-card"><div class="card-topline"><span class="school-mark">HFUT</span><span class="date" data-en="Sep 2024 – Jun 2027 (expected)">2024.09 — 2027.06（预计）</span></div><h3 data-en="Hefei University of Technology">合肥工业大学</h3><p class="degree" data-en="Master's candidate · Logistics Engineering & Management">硕士研究生 · 物流工程与管理</p><p class="coursework" data-en="Inventory management, optimization methods, logistics modeling and simulation, systems engineering.">库存管理、优化方法、物流建模与仿真、系统工程。</p><div class="education-detail"><span data-en="Mean score: 82.60 / 100">平均成绩 82.60 / 100</span><span data-en="Advisor: Prof. Jingxian Chen">导师：Jingxian Chen 教授</span></div></article>
-        <article class="education-card"><div class="card-topline"><span class="school-mark">SHOU</span><span class="date" data-en="Sep 2019 – Jun 2023">2019.09 — 2023.06</span></div><h3 data-en="Shanghai Ocean University">上海海洋大学</h3><p class="degree" data-en="Bachelor of Management · Logistics Management">管理学学士 · 物流管理</p><p class="coursework" data-en="Supply chain management, transportation, SAP/ERP, international logistics and logistics system optimization.">供应链管理、运输管理、SAP/ERP、国际物流、物流系统优化。</p><div class="education-detail"><span data-en="Mean score: 78.36 / 100">平均成绩 78.36 / 100</span></div></article>
-      </div>
-      <p class="honors"><span class="honors-label" data-en="SCHOLARSHIPS">奖学金</span><span data-en="Second-Class Graduate Academic Scholarship (2026–2027) · Third-Class Graduate Academic Scholarship (2024–2025)">研究生二等奖学金（2026—2027） · 研究生三等奖学金（2024—2025）</span></p>
-    </section>
-    <section class="section research-section" id="research" aria-labelledby="research-title">
-      <div class="shell">
-        <div class="section-heading"><div><p class="eyebrow section-number">02 / RESEARCH & PRACTICE</p><h2 id="research-title" data-en="Research & practice">研究与实践</h2></div><p data-en="Model the problem. Learn a policy. Evaluate the trade-offs.">建模问题，学习策略，检验权衡。</p></div>
-        <div class="research-grid">
-          <article class="research-card featured"><div class="card-topline"><span class="research-code">01 / INVENTORY</span><span class="date" data-en="Dec 2025 – present">2025.12 — 至今</span></div><h3 data-en="Age-stratified perishable inventory">易腐品分龄库存优化</h3><p class="project-context" data-en="NSFC Special Project · No. 72542001">国家自然科学基金专项 · 72542001</p><p data-en="Build an inventory MDP and a Python/PyTorch simulator; use DQN and preference-conditioned PPO to coordinate replenishment and markdown decisions.">搭建库存 MDP 与 Python/PyTorch 仿真，使用 DQN 和偏好条件 PPO，联合优化补货与折价。</p><div class="tags"><span>DQN / PPO</span><span>PyTorch</span><span data-en="Multi-objective optimization">多目标优化</span></div><div class="research-result"><strong>82.01% <span data-en="less expired inventory">过期库存减少</span></strong><p data-en="In simulation, the balanced policy reduced expired inventory by 82.01% with a 6.76% profit trade-off versus the profit-first policy. Evaluation: 11 preferences, 30 independent 200-period episodes.">仿真中，平衡策略相比利润优先策略减少 82.01% 的过期库存，利润降低 6.76%。评估涵盖 11 组偏好、30 次独立的 200 期仿真。</p></div></article>
-          <article class="research-card"><div class="card-topline"><span class="research-code">02 / PRICING</span><span class="date" data-en="2026 – present">2026 — 至今</span></div><h3 data-en="Algorithmic collusion in supply chains">供应链算法合谋</h3><p class="project-context" data-en="NSFC General Program · No. 72571084">国家自然科学基金面上项目 · 72571084</p><p data-en="Study joint dynamic pricing and inventory decisions through game-theoretic simulations and DQN/PPO experiments. Prepare datasets, comparisons and figures for a working paper.">通过博弈仿真与 DQN/PPO 实验，研究动态定价与库存联合决策，整理数据、对比分析与论文图表。</p><div class="tags"><span data-en="Game theory">博弈论</span><span data-en="Dynamic pricing">动态定价</span><span data-en="Working paper in preparation">论文准备中</span></div></article>
-          <article class="research-card"><div class="card-topline"><span class="research-code">03 / LOGISTICS</span><span class="date" data-en="Oct 2026 – present">2026.10 — 至今</span></div><h3 data-en="Tobacco logistics optimization">烟草物流优化</h3><p class="project-context" data-en="Industry project · routing & packing">行业项目 · 路径与装载</p><p data-en="Analyze about 100,000 sales and 40,000 transport records. Develop VRP and bin-packing models to support delivery and loading plans.">分析约 10 万条销售记录与 4 万条运输记录，建立车辆路径和装箱模型，支持配送与装载规划。</p><div class="tags"><span>VRP</span><span data-en="Bin packing">装箱优化</span><span data-en="Data analysis">数据分析</span></div></article>
-          <article class="research-card"><div class="card-topline"><span class="research-code">04 / MILK-RUN</span><span class="date" data-en="Summer 2025">2025 年暑期</span></div><h3 data-en="Chery Group milk-run optimization">奇瑞循环取货优化</h3><p class="project-context" data-en="Industry–university research project">产学研项目</p><p data-en="Reproduce rectangle-packing algorithms in C++ and develop a Python tool for route visualization, time windows, cost breakdown and iteration tracking.">用 C++ 复现二维装箱算法，开发 Python 可视化工具，展示取货路径、时间窗、成本与迭代结果。</p><div class="tags"><span>C++ / Python</span><span data-en="Route planning">路径规划</span><span data-en="Visualization">可视化</span></div></article>
-        </div>
-        <aside class="patent-note"><span class="patent-symbol" aria-hidden="true">↗</span><div><p class="eyebrow" data-en="PATENT APPLICATION · CO-INVENTOR">专利申请 · 共同发明人</p><h3 data-en="A Data-Driven Age-Stratified Inventory Optimization Method and System for Perishable Products">一种数据驱动的易腐品分龄库存优化方法及系统</h3><p><span data-en="Chinese invention patent application">中国发明专利申请</span> · 202611386809.1 <span class="patent-status" data-en="Application accepted; not granted">申请已受理，尚未授权</span></p></div></aside>
-      </div>
-    </section>
-    <section class="section shell" id="projects" aria-labelledby="projects-title">
-      <div class="section-heading"><div><p class="eyebrow section-number">03 / OPEN SOURCE</p><h2 id="projects-title" data-en="Selected projects">开源项目</h2></div><a class="text-link" href="https://github.com/errpan?tab=repositories" target="_blank" rel="noopener noreferrer"><span data-en="All repositories">全部仓库</span> ↗</a></div>
-      <div class="project-grid">
-        <article class="project-card"><div class="project-visual paper-visual" aria-hidden="true"><span class="file-icon">PDF</span><div><span class="old-filename">paper_01.pdf</span><span class="rename-arrow">↓</span><span class="new-filename">Author_Year_Title.pdf</span></div><span class="visual-label">ORDER IN YOUR LIBRARY</span></div><div class="project-body"><p class="eyebrow">PYTHON / GUI</p><h3>PaperRenamer</h3><p data-en="An academic PDF renaming tool with metadata extraction, Crossref/arXiv enrichment, BibTeX and configurable filename templates.">论文 PDF 重命名工具：提取元数据，结合 Crossref、arXiv 和 BibTeX，按自定义规则整理文献。</p><a class="text-link" href="https://github.com/errpan/PapperRenamer-PDF-" target="_blank" rel="noopener noreferrer" data-goatcounter-click="project-paper-renamer" data-goatcounter-title="PaperRenamer repository"><span data-en="View source">查看源码</span> ↗</a></div></article>
-        <article class="project-card"><div class="project-visual packing-visual" aria-hidden="true"><div class="packing-box"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="packing-equation">max utilization<br><small>subject to geometry</small></span><span class="visual-label">LESS SPACE. BETTER FIT.</span></div><div class="project-body"><p class="eyebrow">C++ / OPTIMIZATION</p><h3>2D Bin Packing</h3><p data-en="An open-source reproduction of Recursive Partitioning, Five-block and L-Algorithm for packing identical rectangles into a larger rectangle.">复现递归分区、Five-block 和 L-Algorithm，解决同尺寸矩形的二维装箱问题。</p><a class="text-link" href="https://github.com/errpan/2D-Bin-Packing-Problem-same-rectangles-pack-in-the-big-rectangle" target="_blank" rel="noopener noreferrer" data-goatcounter-click="project-bin-packing" data-goatcounter-title="2D Bin Packing repository"><span data-en="View source">查看源码</span> ↗</a></div></article>
-      </div>
-    </section>
-    <section class="section shell" id="skills" aria-labelledby="skills-title">
-      <div class="section-heading"><div><p class="eyebrow section-number">04 / SKILLS & EXPERIENCE</p><h2 id="skills-title" data-en="Skills & experience">技能与经历</h2></div><p data-en="Technical depth, grounded in operational experience.">技术能力，也来自业务实践。</p></div>
-      <div class="skills-layout"><div class="skill-groups">
-        <div class="skill-row"><h3 data-en="Programming">编程分析</h3><p>Python · C++ · SQL · NumPy · pandas</p></div>
-        <div class="skill-row"><h3 data-en="Learning & optimization">学习优化</h3><p>PyTorch · Gymnasium · DQN · PPO · Gurobi · CPLEX · OR-Tools</p></div>
-        <div class="skill-row"><h3 data-en="Research tools">研究工具</h3><p>Linux · Git · Docker · LaTeX · Matplotlib</p></div>
-        <div class="skill-row"><h3 data-en="Business analytics">业务分析</h3><p>Power BI · Excel · SPSS · SAP / ERP</p></div>
-      </div><div class="certificate-card"><p class="eyebrow" data-en="CERTIFICATIONS">技能证书</p><div class="language-score"><strong>498</strong><span data-en="CET-6 · English">CET-6 · 英语六级</span></div><ul><li data-en="CSCMP Supply Chain Management Certificate">CSCMP 供应链管理师</li><li data-en="NCRE Level 2 · Python">计算机二级 · Python</li><li data-en="Power BI Business Intelligence & Visualization Certificate">Power BI 商业智能数据可视化证书</li><li data-en="Putonghua Level 2-A · C1 driver's license">普通话二级甲等 · C1 驾照</li></ul></div></div>
-      <div class="experience-grid">
-        <article><p class="date">2024.03 — 2024.06</p><h3 data-en="Shanghai Sangye Textile Co., Ltd.">上海桑野纺织有限公司</h3><p class="experience-role" data-en="Export sales representative · Full-time">外贸业务员 · 全职</p><p data-en="Managed inquiries, export orders and delivery schedules; reconciled shipping records and coordinated cross-border fulfillment.">跟进询盘、外贸订单与交付，核对运输单据，协同跨境供应链履约。</p></article>
-        <article><p class="date">2023.01 — 2023.02</p><h3 data-en="Shanghai Hufang Architectural Design · Kashgar Branch">上海沪防建筑设计 · 喀什分公司</h3><p class="experience-role" data-en="Operations assistant · Internship">运营助理 · 实习</p><p data-en="Compiled operating reports and documentation, consolidated operational data and supported customer service.">整理经营报表与日常文档，汇总运营数据，协助处理客户诉求。</p></article>
-      </div>
-      <p class="service-note"><span data-en="Campus & service">校园与服务</span><span data-en="Class sports committee member and counselor's assistant; coordinated campus activities and took part in administrative volunteering and blood donation.">曾任体育委员、辅导员助理，组织校园活动，参与行政志愿服务与无偿献血。</span></p>
-    </section>
-    <section class="contact-section" id="contact" aria-labelledby="contact-title">
-      <div class="shell contact-inner"><div><p class="eyebrow section-number">05 / GET IN TOUCH</p><h2 id="contact-title" data-en="Let's connect.">欢迎交流。</h2><p data-en="Open to conversations on reinforcement learning, supply chain optimization and research collaboration.">欢迎交流强化学习、供应链优化与研究合作。</p><a class="contact-email" href="mailto:pani415@126.com" data-goatcounter-click="contact-email" data-goatcounter-title="Email contact click">pani415@126.com <span aria-hidden="true">↗</span></a></div><div class="contact-side"><a class="button primary" href="mailto:pani415@126.com"><span data-en="Send an email">发送邮件</span><span aria-hidden="true">↗</span></a><button class="copy-button" id="copy-email" type="button" hidden><span data-en="Copy email">复制邮箱</span></button><a class="text-link" href="https://github.com/errpan" target="_blank" rel="noopener noreferrer">github.com/errpan ↗</a></div></div>
-    </section>
-  </main>
-  <footer class="shell footer"><p>© <span id="year">2026</span> Yierpani Yimamu</p><p data-en="Anonymous visit statistics by GoatCounter.">使用 GoatCounter 进行匿名访问统计。</p><a href="#home"><span data-en="Back to top">回到顶部</span> ↑</a></footer>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script data-goatcounter="https://erpan.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-</body>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" data-i18n="copied">Email copied</div>
+    <script data-goatcounter="https://erpan.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+  </body>
 </html>
